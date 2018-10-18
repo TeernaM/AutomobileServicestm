@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script type = "text/javascript" src = "jquery1-7-2.js"></script>
+
+<script type = "text/javascript" src = "jquery1-7-2.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>addCustomer</title>
+<script type="text/javascript">
+	$(function(){
+		
+		$("#addBtn").on('click',function(){
+			
+
+			$.ajax({
+				url:"http://localhost:8080/AutomobileService/rest/employee",
+
+				type:"POST",
+				datatype:'html',
+				data:$('#form1').serialize(),
+				success:function(data,textStatus,jqXHR){	
+					$('#msg').text(data);
+					window.location.href = "customer.html";
+				},
+				error:function(jqXHR,textStatus,errorThrown){
+					console.log(errorThrown);
+				}
+			})
+						
+		});	
+		$("#regBtn").on('click',function(){
+			$.ajax({
+				url:"http://localhost:8080/AutomobileService/rest/employee/add",
+				type:"POST",
+				data:$('#regForm').serialize(),
+				success:function(data){	
+					$("#msg").text(data);	
+				}
+			})
+		});
+		
+	});
+</script>
+</head>
+<body class = "bg-success">
+
+
+<h4 class="text-center">TM SERVICES</h4>
+
+<p id = "msg"></p>
+<form id= "form1" >
+
+	<div class = "form-group">
+		<label for = "employeeId">Username</label>
+		<input type = "text" name = "employeeId" id= "employeeId" class = "form-control"/>
+	</div>
+	
+	<div class = "form-group">
+		<label for = "empPassword">Password</label>
+		<input type = "password" name = "empPassword" id= "empPassword"  class = "form-control"/>
+	</div>
+	
+	<div class = "form-group">
+		<input type = "button" value = "login" id = "addBtn" class = "btn btn-danger"/>
+	</div>
+</form>
+
+<form id="regForm">
+	<div class = "form-group">
+	<label for="empNameR">Name</label>
+	<input type="text" id="empNameR" name="empNameR" class = "form-control"/>
+	<label for="empPassR">Enter your desired Password</label>
+	<input type="text" id="empPassR" name="empPassR" class = "form-control"/>
+	
+	<input type="button" id="regBtn" value="Register" class = "btn btn-danger"/>
+	</div>
+</form>
+
+
+</body>
+</html>
